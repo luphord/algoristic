@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"fmt"
+	"os"
 
 	"github.com/luphord/algoristic/goldensquares"
 	"github.com/spf13/cobra"
@@ -13,8 +13,7 @@ var goldensquaresCmd = &cobra.Command{
 	Short: "Create an image of golden squares.",
 	Long:  `Golden squares long description ToDo.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Golden ratio:", goldensquares.GoldenRatio)
-		goldensquares.TestSvg()
+		goldensquares.GoldenSquares(os.Stdout, 600)
 	},
 }
 

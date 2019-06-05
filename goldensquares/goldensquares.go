@@ -15,8 +15,7 @@ func GoldenSquares(writer io.Writer, width uint32) {
 	height := int32(float64(width) / GoldenRatio)
 	canvas.Start(int(width), int(height))
 	canvas.Rect(0, 0, int(width), int(height), "fill:grey")
-	gen := &goldenSquareGenerator{&goldenSquare{0, 0, 0, 0}}
-	for iter := gen; iter.HasNext(); {
+	for iter := new(&goldenSquare{0, 0, 0, 0}); iter.HasNext(); {
 		iter.Next()
 	}
 	canvas.End()
@@ -31,6 +30,10 @@ type goldenSquare struct {
 
 type goldenSquareGenerator struct {
 	next *goldenSquare
+}
+
+func new(sq *goldenSquare) *goldenSquareGenerator {
+	return &goldenSquareGenerator{sq}
 }
 
 func (gen *goldenSquareGenerator) HasNext() bool {
